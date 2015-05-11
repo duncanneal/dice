@@ -15,14 +15,14 @@ class GameTest < MiniTest::Test
     future = [2,3,6,1]
     dice = PsychicDice.new future
     future.each do |predicted|
-      assert_equal dice.roll, predicted
+      assert_equal predicted,dice.roll
     end
   end
 
   def test_players_have_dice
     dice  = Dice.new
     alice = Player.new "alice", dice
-    assert_equal alice.dice, dice
+    assert_equal dice, alice.dice
   end
 
   def test_somebody_eventually_wins
@@ -40,7 +40,7 @@ class GameTest < MiniTest::Test
     game  = Game.new su, james
     game.play!
 
-    assert_equal game.winner, james
+    assert_equal james, game.winner
   end
 
   def test_predictable_games_are_predictable
@@ -49,7 +49,7 @@ class GameTest < MiniTest::Test
     game = Game.new brit, sarah
     game.play!
 
-    assert_equal game.winner, brit
-    assert_equal game.turn, 3
+    assert_equal brit, game.winner
+    assert_equal 3, game.turn
   end
 end
